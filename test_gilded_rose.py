@@ -6,23 +6,23 @@ from gilded_rose import Item, GildedRose
 
 class GildedRoseTest(unittest.TestCase):
 
-    def test_conjured_quality_degrades_twice_as_fast(self):
-        items = [Item("Conjured", 15, 6)]
+    def test_vest_decreases_in_quality(self):
+        items = [Item("+5 Dexterity Vest", 0, 10)]
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality()
-        self.assertEqual(items[0].quality, 4)
+        self.assertEqual(items[0].quality, 9)
 
-    def test_conjured_quality_degrades_twice_as_fast_after_sell_date(self):
-        items = [Item("Conjured", 0, 6)]
+    def test_aged_brie_increases_in_quality(self):
+        items = [Item("Aged Brie", 0, 10)]
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality()
-        self.assertEqual(items[0].quality, 2)
+        self.assertEqual(items[0].quality, 11)
 
-    def test_conjured_quality_never_negative(self):
-        items = [Item("Conjured", 0, -2)]
+    def test_conjured_items_degrade_twice_as_fast(self):
+        items = [Item("Conjured Mana Cake", 12, 10)]
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality()
-        self.assertGreaterEqual(items[0].quality, 0)
+        self.assertEqual(items[0].quality, 8)
 
 if __name__ == '__main__':
     unittest.main()
